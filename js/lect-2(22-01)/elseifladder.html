@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let m;
+        console.log(m??0);
+        
+        console.log(123+10);
+        //Arithmatic  +,-,*,/,%,++,--
+        function findRem(){
+            let num1 = document.getElementById('num1').value;
+            let num2 = document.getElementById('num2').value;
+            if(num1 > 0 && num2 >0){
+                alert("First")
+            }
+            else if(num1 <0 && num2 >0){
+                alert("sec");
+            }
+            else if(num1<0 && num2<0){
+                alert("third");
+            }
+            else if(num1 > 0 && num2<0){
+                alert("Forth");
+            }
+            else{
+                alert("center");
+            }
+        }
+        
+    </script>
+</head>
+<body>
+    
+    <fieldset>
+        <label for="">Enter num</label>
+        <input type="text" name="" id="num1">
+        <br><br>
+         <label for="">Enter num2</label>
+        <input type="text" name="" id="num2">
+        <button onclick="findRem()">Check</button>
+    </fieldset>
+</body>
+</html>

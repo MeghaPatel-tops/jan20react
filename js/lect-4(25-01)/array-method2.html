@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         let subject=['php','pyhton','node','java','html','css','js'];
+
+         console.log(subject);
+
+         console.log(subject.slice(2,5));
+
+         let framework=['React','Express'];
+
+        let newArray= subject.concat(framework);
+
+         console.log(newArray);
+
+         newArray.forEach(function(item,index,newArray){
+            console.log("index=",index);
+            console.log("item=",item);
+            
+            
+         })
+
+         function findSubject(){
+              let sub= prompt("Enter subject");
+              let ans = newArray.indexOf(sub,0);
+             
+              if(ans != -1){
+                   alert("element found of index of="+ans)
+              }
+              else{
+                  alert("subject not found")
+              }
+         }
+         
+         
+         
+         
+    </script>
+</head>
+<body>
+     <button onclick="findSubject()">FindElement</button>
+</body>
+</html>

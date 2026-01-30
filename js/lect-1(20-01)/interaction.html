@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function alertExample(){
+            alert("Welcome to js tutorials");
+        }
+        function promptExample(){
+            let name = prompt("Enter your name");
+            alert(name)
+        }
+        function confirmExample(){
+            let status = confirm("Are you want delete Item?");
+            if(status){
+                alert("Item successfully deleted");
+            }
+            else{
+                alert("Try again");
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <button onclick="alertExample()">Alert Example</button>
+    <button onclick="promptExample()">Prompt exmaple</button>
+    <button onclick="confirmExample()">Confirm Example</button>
+</body>
+</html>

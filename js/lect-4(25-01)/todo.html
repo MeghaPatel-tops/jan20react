@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let todoArray=[],i;
+
+        window.onload=showTodo;
+
+        function showTodo(){
+            document.getElementById('btnadd').style.display="block";
+            document.getElementById('btnupdate').style.display="none";
+
+            let str="";
+            for(i=0;i<todoArray.length;i++){
+                str+=`
+                    <tr>
+                    <td>${i+1}</td>
+                    <td>${todoArray[i]}</td>
+                    <td><button onclick="delTodo(${i})">Delete</button></td>
+                     <td><button onclick="editTodo(${i})">Edit</button></td>
+                </tr>
+                `
+            }
+            document.getElementById('tdata').innerHTML=str;
+        }
+
+        function delTodo(index){
+                todoArray.splice(index,1);
+                showTodo();
+        }
+
+        function editTodo(index){
+            document.getElementById('btnupdate').style.display="block";
+            document.getElementById('btnadd').style.display="none";
+                document.getElementById('taskname').value=todoArray[index];
+                document.getElementById('taskid').value=index;
+        }
+
+        function updateTodo(){
+            let id= document.getElementById('taskid').value;
+            let name=document.getElementById('taskname').value;
+            todoArray.splice(id,1,name);
+            document.getElementById('taskname').value="";
+            showTodo();
+        }
+
+        function addTodo(){
+            let taskname=document.getElementById('taskname').value;
+            todoArray.push(taskname);
+            console.log(todoArray);
+            document.getElementById('taskname').value="";
+            showTodo();
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>
+            Add Todo
+        </legend>
+        <label for="">enter your Task</label>
+        <input type="text" id="taskname">
+        <input type="button" value="Add" onclick="addTodo()" id="btnadd">
+         <input type="hidden" name="" id="taskid">
+        <input type="button" value="Update" onclick="updateTodo()" id="btnupdate">
+    </fieldset>
+    <fieldset>
+        <legend>View Todo</legend>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>SR no</th>
+                    <th>Task Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tdata">
+                
+            </tbody>
+        </table>
+    </fieldset>
+</body>
+</html>
