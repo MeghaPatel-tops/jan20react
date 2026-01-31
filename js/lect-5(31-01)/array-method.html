@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         }
+         table,td,th {
+            padding: 10px;
+           
+            border: 1px solid black;
+         }
+    </style>
+   
+</head>
+<body>
+        <div class="main">
+             <h1>Products</h1>
+             <div>
+                <h4>Filter product by Category</h4>
+                <p><button onclick="filterProductFunation('shose')">Shose</button> 
+                    <button onclick="filterProductFunation('cloths')">cloths</button></p>
+             </div>
+       <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody id="tdata">
+                   
+            </tbody>
+       </table>
+        </div>
+
+        <script>
+        let products=[
+            {
+                pid:101,
+                pname:'Puma shose',
+                price:21000,
+                category:'shose'
+            },
+            {
+                pid:102,
+                pname:'Addidas shose',
+                price:25000,
+                category:'shose'
+            }
+            ,{
+                pid:103,
+                pname:'Nike shose',
+                price:21000,
+                category:'shose'
+            }
+            ,{
+                pid:104,
+                pname:'Casual t-shrt',
+                price:21000,
+                category:'cloths'
+            },{
+                pid:105,
+                pname:'Casual Jeans',
+                price:21000,
+                category:'cloths'
+            }
+        ]
+         
+        console.log(products);
+        function filterProductFunation(cat){
+             let filterProduct=  products.filter((index,i)=>{
+               if(index.category==cat){
+                  return index;
+               }
+            })
+            loadData(filterProduct)
+        }
+       
+
+        function loadData(productArray){
+            let =str="";
+              productArray.map((index,i)=>{
+                   str+=`
+                     <tr>
+                        <td>${index.pname}</td>
+                        <td>${index.price}</td>
+                        <td>${index.category}</td>
+                    </tr>
+                   `
+              })
+              document.getElementById('tdata').innerHTML=str;
+        }
+
+        
+
+        window.onload= loadData(products);
+        
+    </script>
+</body>
+</html>
