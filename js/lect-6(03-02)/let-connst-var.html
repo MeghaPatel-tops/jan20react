@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let m=100;
+        console.log(m);
+
+        m=200;//redefine possible cant redclare
+        console.log(m);
+
+        const pi = 3.14;
+        console.log(pi);
+
+        // pi=2.7;=>genrate error cant define and redclare
+        
+
+        var x=100;//using var redefine possible redeclare possible
+        console.log(x);
+
+        var x=90;
+        console.log(x);
+
+        function test(){
+            {
+                let ans="abc";
+                console.log(ans);
+                var price=2000;
+                console.log("in local block price=",price);
+                
+            }
+             console.log("in function block price=",price);
+           // console.log(ans);//gen error bcoz let and const has block scope
+        }
+
+         test();
+        
+        
+        
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

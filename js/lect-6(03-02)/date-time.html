@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box{
+            padding: 50px 200px;
+            background-color: gray;
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+      <div class="box" id="box1">
+    
+      </div>
+
+          <script>
+         function printTime(){
+            
+            
+        let cDate = new Date();
+      
+        let todate= `
+            ${cDate.getFullYear() }-${cDate.getMonth() }-${cDate.getDate() }:${cDate.getHours() }:${cDate.getMinutes() }:${cDate.getSeconds() }
+        `;
+
+         document.getElementById('box1').innerHTML=todate
+         }
+        // let date = new Date();
+        // console.log(+date);
+
+        setInterval(printTime,1000);
+         
+    </script>
+</body>
+</html>

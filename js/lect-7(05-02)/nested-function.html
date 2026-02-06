@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  
+    <script>
+        
+        // function outer(){
+        //     let i=0;
+
+        //     return function inner(){
+        //         return ++i;
+        //     }
+        // }
+
+        // let call1= outer();
+        // console.log(call1);
+
+        // console.log(call1());
+
+
+          function outer(){
+            let i=0;
+
+            return function inner(){
+                 ++i;
+                 console.log(i);
+                 
+            }
+        }
+
+        let call1= outer();
+        
+
+        call1();
+
+//         outer() finishes execution
+
+// Normally i should be destroyed ❌
+
+// But inner() closes over i
+
+// JS keeps i alive in memory ✅
+
+// ➡️ This is closure
+        
+
+    window.user={
+        name:"Megha"
+    }
+        
+    </script>
+
+      <script src="script.js"></script>
+</head>
+<body>
+    
+</body>
+</html>
