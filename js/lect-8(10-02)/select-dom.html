@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1{
+            height: 100px;
+            width: 100px;
+            border: 2px solid blue;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+     <p id="one">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed consequuntur in eveniet velit sequi voluptatum aliquam cumque consequatur, quae animi veniam? Totam numquam quis eveniet earum maiores ab nesciunt fugiat.</p>
+
+     <div class="box">
+
+     </div>
+
+     <div class="box1"></div>
+     <div class="box1"></div>
+     <div class="box1"></div>
+     <div class="box1"></div>
+     <div class="box1"></div>
+     
+     <button onclick="colorChanger()">ChangeColor</button>
+
+     <script>
+            function colorChanger(){
+                let para = document.getElementById('one');
+            para.style.color="red"
+            
+            let boxArray = document.querySelectorAll(".box1");
+            console.log("boxarray=",boxArray);
+            
+            for(i=0;i<boxArray.length;i++){
+                if(i%2==0){
+                    boxArray[i].style.backgroundColor="gray"
+                }
+                else{
+                    boxArray[i].style.backgroundColor="black"
+                }
+            }
+            
+            let div1 = document.querySelector('.box');
+            console.log(div1);
+            
+            div1.style.height="100px";
+            div1.style.width="100px";
+            div1.style.backgroundColor="aqua"
+            }
+     </script>
+</body>
+</html>

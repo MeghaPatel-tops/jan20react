@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <fieldset>
+        <legend>Fill form</legend>
+        <label for="">Image</label>
+        <div class="box" id="pre"></div>
+        <input type="file" name="" id="img1" onchange="fileUpload(this.value)">
+    </fieldset>
+  <img src="" alt="">
+
+   <script>
+    function fileUpload() {
+        let img1 = document.getElementById("img1").files[0];
+
+        if (!img1) return;
+
+        let reader = new FileReader();
+
+        reader.onload = function () {
+            let image1 = document.createElement('img');
+            image1.src = reader.result; // FULL data URL
+            image1.style.height = "100px";
+            image1.style.width = "100px";
+            image1.style.objectFit = "cover";
+
+            let pre = document.getElementById('pre');
+            pre.innerHTML = ""; // clear previous preview
+            pre.appendChild(image1);
+        };
+
+        reader.readAsDataURL(img1);
+    }
+</script>
+
+</body>
+</html>

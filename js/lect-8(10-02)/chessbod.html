@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+        }
+        .main{
+            height: 900px;
+            width: 900px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .box{
+            height: 100px;
+            width: 100px;
+            border: 1px solid black;
+        }
+        .even{
+            background-color: black;
+            color: white;
+        }
+        .odd{
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="main" id="main">
+        
+    </div>
+
+    <script>
+        str=""
+        for(i=1;i<=9;i++){
+            for(j=1;j<=9;j++){
+                let backColor = (j+i)%2==0?'even':'odd'
+                str+=`<div class="box ${backColor}">${i}-${j}</div>`
+
+            }
+        }
+        document.getElementById('main').innerHTML=str;
+    </script>
+</body>
+</html>

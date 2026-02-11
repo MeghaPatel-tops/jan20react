@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            display: flex;
+            gap: 50px;
+        }
+        .box1{
+            height: 100px;
+            width: 100px;
+            border: 2px solid blue;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+ 
+
+     <div class="main">
+        <div class="box1"></div>
+     <div class="box1"></div>
+     <div class="box1"></div>
+     <div class="box1"></div>
+     <div class="box1"></div>
+     </div>
+     
+     <button onclick="colorChanger()">ChangeColor</button>
+
+     <script>
+            function colorChanger(){
+            
+            let boxArray = document.querySelectorAll(".box1");
+            console.log("boxarray=",boxArray);
+
+            let colorarray = ['red','green','orange','gray','black'];
+            
+            for(i=0;i<boxArray.length;i++){
+               boxArray[i].style.backgroundColor=colorarray[i]
+            }
+            
+           
+            }
+     </script>
+</body>
+</html>
