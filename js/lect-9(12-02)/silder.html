@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            padding: 100px;
+        }
+        .main{
+            height: 500px;
+            width: 100%;
+            border:2px solid black;
+            overflow: hidden;
+            position: relative;
+        }
+        .main img{
+            height: 100%;
+            width: 100%;
+        }
+        .nxt{
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            right: 10px;
+        }        
+    </style>
+</head>
+<body>
+    <div class="main">
+        <button id="nxt" class="nxt">Next</button>
+        <img src="img1.jpg" alt="" id="img-1">
+        <img src="img2.jpg" alt="" id="img-2">
+        <img src="img3.jpg" alt="" id="img-3">
+    </div>
+
+
+    <script>
+        counter = 1;
+        document.getElementById("img-1").style.display="block";
+        document.getElementById("img-2").style.display="none";
+        document.getElementById("img-3").style.display="none";
+
+        document.getElementById('nxt').addEventListener('click',function(){
+
+            console.log("in=",counter);
+             if(counter==3){
+                 let removeid = "img-3";
+                    document.getElementById(removeid).style.display="none";
+                    counter=1;
+                    let addid="img-"+counter;
+                    console.log(addid);
+                    
+                    document.getElementById(addid).style.display="block";
+                    
+                    console.log("out=",counter);
+            }
+            else{
+                 let removeid = "img-"+counter;
+            document.getElementById(removeid).style.display="none";
+            counter++;
+            let addid="img-"+counter
+            document.getElementById(addid).style.display="block";
+            
+               console.log("out=",counter);
+            }
+     
+           
+
+           
+        })
+
+    </script>
+</body>
+</html>

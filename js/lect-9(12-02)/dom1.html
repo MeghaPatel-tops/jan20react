@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,tr,td{
+            border: 2px solid black;
+            border-collapse: collapse;
+            padding: 20px;
+        }
+    </style>
+    <script>
+        function textChanger(){
+            let str = prompt("Add text");
+            document.getElementById('para1').innerText=str;
+        }
+        function createTable(){
+            let row = prompt("Enter table Row");
+            let col = prompt("Enter column");
+
+
+            let str="";
+            for(i=1;i<=row;i++){
+                str+=`<tr>`
+                    for(j=1;j<=col;j++){
+                        str+=`<td>Item-${i}-${j}</td>`
+                    }
+                str+='</tr>';    
+            }
+            console.log(str);
+            
+
+            let tbl = document.createElement('table');
+            tbl.setAttribute('id','tbl1');
+            tbl.innerHTML=str;
+            console.log(tbl);
+            
+           document.getElementById('result').appendChild(tbl)
+            
+        }
+
+        function removeTable(){
+            let tbl = document.getElementById('tbl1');
+            if(tbl){
+                 document.getElementById('result').removeChild(tbl)
+            }
+            else{
+                alert("table not found");
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <p id="para1">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum magnam quaerat, earum libero sapiente sint placeat voluptates consequuntur modi quasi temporibus adipisci vitae. Inventore quod esse doloremque quaerat placeat quas!
+    </p>
+
+    <button onclick="textChanger()">Want to chnage text</button>
+
+    <button onclick="createTable()">
+        create dummy table
+    </button>
+    <button onclick="removeTable()">
+       Remove table
+    </button>
+    <div id="result"></div>
+
+</body>
+</html>
