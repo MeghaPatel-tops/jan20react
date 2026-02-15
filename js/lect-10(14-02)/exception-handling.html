@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function getData(){
+           try {
+                console.log("get data function called");
+
+                getProduct();
+                
+           } catch (error) {
+                console.log(error.message)
+                throw new NofunctionFound("Create function before calling");
+           }
+          
+           finally{
+                 console.log("function task over");
+           }
+            
+        }
+
+    class Error {
+        constructor(message) {
+            this.message = message;
+            this.name = "Error"; 
+    
+        }
+    }
+
+    class NofunctionFound extends Error{
+            constructor(msg){
+                super(msg)
+            }
+    }
+
+    </script>
+</head>
+<body>
+    <button onclick="getData()">Click Me</button>
+</body>
+</html>

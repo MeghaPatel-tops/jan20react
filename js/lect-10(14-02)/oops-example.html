@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        class Car{
+            _year=2026;
+            #discount="10%"
+            constructor(modelname,price){
+                this.model=modelname
+                this.price=price
+                
+               
+            }
+
+            printCar(){
+                console.log("car model=",this.model);
+                console.log("car price=",this.price);
+                  console.log("year of car model=",this._year);
+                  console.log("private data=",this.#discount);
+            }
+        }
+
+        let c1 = new Car('BMW','1cr');
+        
+
+        c1.year=2020;
+
+        //console.log("private data=",c1.#discount);
+        
+
+        console.log("year of car model=",c1._year);
+
+        c1.printCar();
+
+      
+        
+
+        //inheritance
+
+
+        class Category{
+            constructor(cname){
+                this.catname=cname;
+            }
+        }
+        class Product extends Category{
+            constructor(pid,pname,catname){
+                super(catname)
+                this.pid=pid;
+                this.pname=pname;
+                
+            }
+
+            printProduct(){
+                console.log("Category",this.catname);
+                console.log("pid",this.pid);
+                console.log("pname",this.pname);
+                   
+            }
+        }
+
+        let p1 = new Product(101,"laptop","electroincs");
+        p1.printProduct();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

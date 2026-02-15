@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        
+        class Counter{
+            static count=0;
+            constructor(){
+                Counter.count++;
+               // console.log("counter",Counter.count);
+                
+            }
+
+            static countPrint(){
+                   console.log("method=",Counter.count);
+            }
+        }
+
+        let c1= new Counter();
+ 
+
+         let c2= new Counter();
+          let c3= new Counter();
+
+        Counter.countPrint();
+   
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
