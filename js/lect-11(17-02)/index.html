@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function addScriptFile(){
+            let scriptTag = document.createElement('script');
+            scriptTag.src="script.js";
+            console.log(scriptTag);
+            document.head.appendChild(scriptTag)
+        }
+        addScriptFile(function(){
+            Test();
+        })
+        
+
+    </script>
+</head>
+<body>
+    
+    <!-- <button onclick="addScriptFile()">
+        add script
+    </button> -->
+</body>
+</html>
