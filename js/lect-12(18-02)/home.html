@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="module">
+        // import {fruits,printArray} from './fruitsArray.js'
+
+        // console.log(fruits);
+
+        // let data =printArray()
+
+        // console.log(data);
+        
+        // document.getElementById("main").innerHTML=data
+
+
+        //dynamic imports
+
+        let modulename = prompt("Enter module namme");
+
+        import(modulename).then(obj=>console.log(obj.array)
+        ).catch(error=>console.log(error)
+        )
+        
+    </script>
+</body>
+</html>
