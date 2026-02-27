@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form-div{
+           padding: 50px;
+            border:5px solid black;
+            border-radius: 20px;
+        }
+        .form-group{
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        #pwdMsg p{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-div">
+        <h1>Registraion form</h1>
+        <form method="post" id="regform">
+            <div class="form-group">
+                <label for="">Enter Name</label>
+                <input type="text" name="" id="username">
+                <p id="error-username" style="display: none;color:red"></p>
+            </div>
+            <div class="form-group">
+                <label for="">Enter email</label>
+                <input type="text" name="" id="email">
+                 <p id="error-email" style="display: none;color:red"></p>
+            </div>
+            <div class="form-group">
+                <label for="">Enter password</label>
+                <input type="text" name="" id="pwd">
+                <div id="pwdMsg">
+                       <p id="p-1">a-z</p>
+               <p id="p-2">Special char</p>
+               <p id="p-3">0-9</p>
+               <p id="p-4">max len >8</p>
+                <p id="p-5">A-Z</p>
+                 <p id="error-pwd" style="display: none;color:red"></p>
+                </div>
+            
+            </div>
+             <div class="form-group">
+                 <input type="submit" value="Submit">
+             </div>
+        </form>
+    </div>
+
+
+    <script>
+        
+     function validateEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+        }
+
+
+        document.getElementById('pwd').addEventListener('keyup',(e)=>{
+               let value = e.target.value;
+               console.log(value);
+               if(/^(?=.*[a-z])/.test(value)== true){
+                  document.getElementById('p-1').style.color="green";
+               }
+              if(/(?=.*[A-Z])/.test(value)== true){
+                  document.getElementById('p-5').style.color="green";
+               }
+               if(/(?=.*\d)/.test(value)== true){
+                  document.getElementById('p-3').style.color="green";
+               }
+             if(/^(?=.*[@$!%*?&])/.test(value)== true){
+                  document.getElementById('p-2').style.color="green";
+               }
+            if(value.length >=8){
+                    document.getElementById('p-4').style.color="green";
+               }
+              
+               
+        })
+
+        document.getElementById("regform").addEventListener('submit',(e)=>{
+            e.preventDefault();
+            //=========================Username validation==================
+            let username=document.getElementById('username');
+            let errorUsername= document.getElementById('error-username');
+            if(username.value == ""){
+                username.focus();
+               errorUsername.style.display="block";
+               errorUsername.innerText="Username required";
+            }
+            else{
+                 errorUsername.style.display="none";
+            }
+            //=====================Email validation====================
+             let email=document.getElementById('email');
+            let errorEmail= document.getElementById('error-email');
+
+            if(email.value == ""){
+                email.focus();
+               errorEmail.style.display="block";
+               errorEmail.innerText="Email required";
+            }
+            else if(validateEmail(email.value)==false){
+                errorEmail.style.display="block";
+               errorEmail.innerText="Enter valid  email(abx@example.com)";
+            }
+            else{
+                 errorEmail.style.display="none";
+            }
+
+        ///================================password validation============
+         let pwd=document.getElementById('pwd');
+            let errorPwd= document.getElementById('error-pwd');
+        if(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(pwd.value) ==false && pwd.value==""){
+             pwd.focus();
+               errorPwd.style.display="block";
+               errorPwd.innerText="password required";
+        }
+        else{
+             errorPwd.style.display="none";
+             document.getElementById('pwdMsg').style.display="none"
+        }
+        })
+    </script>
+</body>
+</html>
