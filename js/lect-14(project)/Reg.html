@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow p-4" style="width: 100%; max-width: 450px;">
+            
+            <h3 class="text-center mb-4">Create Account</h3>
+
+            <form id="frm1">
+                <!-- Full Name -->
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="fullname" placeholder="Enter full name" >
+                    <p id="error-username" style="display: none;color:red"></p>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" >
+                    <p id="error-email" style="display: none;color:red"></p>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter password" >
+                    <p id="error-pwd" style="display: none;color:red"></p>
+                </div>
+
+               
+
+              
+                <!-- Register Button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+
+                <!-- Login Link -->
+                <div class="text-center mt-3">
+                    <span>Already have an account?</span>
+                    <a href="Login.html" class="text-decoration-none">Login</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+          function validateEmail(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+        }
+           document.getElementById('frm1').addEventListener('submit',(e)=>{
+                 e.preventDefault();
+
+                let fullname= document.getElementById('fullname');
+                let errorUsername= document.getElementById('error-username');
+
+                 if(fullname.value == ""){
+                  
+                    errorUsername.style.display="block";
+                    errorUsername.innerText="Username required";
+                    return false;
+                    }
+                    else{
+                        errorUsername.style.display="none";
+                }
+
+                let email=document.getElementById('email');
+            let errorEmail= document.getElementById('error-email');
+
+            if(email.value == ""){
+                email.focus();
+               errorEmail.style.display="block";
+               errorEmail.innerText="Email required";
+               return false
+            }
+            else if(validateEmail(email.value)==false){
+                errorEmail.style.display="block";
+               errorEmail.innerText="Enter valid  email(abx@example.com)";
+            }
+            else{
+                 errorEmail.style.display="none";
+            }
+
+
+              let pwd= document.getElementById('password');
+                let errorPwd= document.getElementById('error-pwd');
+
+                 if(password.value == ""){
+                  
+                    errorPwd.style.display="block";
+                    errorPwd.innerText="Password required";
+                    return false
+                    }
+                    else{
+                        errorPwd.style.display="none";
+                }
+                 let userObj={
+                    username:fullname.value,
+                    email:email.value,
+                    pwd:password.value
+                }
+            let getLocal = localStorage.getItem('users');
+            if(getLocal){
+                   let newArray = JSON.parse(getLocal)
+
+                   console.log(typeof(newArray));
+                   
+                   //console.log(newArray);
+
+                   let filterArray = newArray.filter((index,i)=>{
+                         if(index.email==email.value){
+                             return index
+                         }
+                   })
+
+                   if(filterArray.length>0){
+                       alert("Email already exits")
+                   }
+                   else{
+                        newArray.push(userObj);
+                        localStorage.setItem('users',JSON.stringify(newArray))
+                        window.location="login.html";
+                   }
+
+                   
+
+                   
+            }
+            else{
+                   
+
+                let user=[userObj];
+                console.log(user);
+                
+                let userStr= JSON.stringify(user)
+                console.log(userStr);
+                
+                localStorage.setItem("users",userStr)
+                window.location="login.html";
+            }
+
+           
+                
+                
+
+
+           })
+    </script>
+
+</body>
+</html>

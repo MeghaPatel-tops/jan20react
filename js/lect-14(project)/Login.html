@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+            
+            <h3 class="text-center mb-4">Login</h3>
+
+            <form id="loginfrm">
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" required>
+                </div>
+
+              
+                <!-- Button -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+
+               
+                <div class="text-center mt-3">
+                    <a href="Reg.html" class="text-decoration-none">Registration?</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        document.getElementById('loginfrm').addEventListener('submit',(e)=>{
+            e.preventDefault();
+            let email = document.getElementById('email').value;
+            let pwd=document.getElementById('pwd').value;
+
+            let usersArray = localStorage.getItem("users");
+            usersArray = JSON.parse(usersArray);
+            console.log(usersArray);
+
+             let filterArray = usersArray.filter((index,i)=>{
+                         if(index.email==email && index.pwd == pwd){
+                             return index
+                         }
+            })
+
+            if(filterArray.length > 0){
+                window.location='Home.html'
+            }
+            else{
+                alert("Login fail")
+            }
+            
+        })
+    </script>
+
+</body>
+</html>
