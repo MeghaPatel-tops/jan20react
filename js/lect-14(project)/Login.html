@@ -62,8 +62,12 @@
                          }
             })
 
+            console.log(filterArray);
+            
+
             if(filterArray.length > 0){
-                window.location='Home.html'
+                localStorage.setItem('session-user',JSON.stringify(filterArray[0]))
+                window.location='index.html'
             }
             else{
                 alert("Login fail")
