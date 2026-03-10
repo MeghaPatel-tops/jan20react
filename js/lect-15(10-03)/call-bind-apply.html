@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <script>
+        const person={
+            name:'abc',
+            email:'abc@example.com'
+        }
+
+        function printUser(city,counter){
+            let str=`
+                name:${this.name}
+                city:${city}
+            `
+
+            console.log(str);
+            
+        }
+        function printUserApply(city,counter){
+            let str=`
+                name:${this.name}
+                city:${city}
+            `
+
+            console.log(str);
+            
+        }
+
+        function printUserBind(city,counter){
+            let str=`
+                name:${this.name}
+                city:${city}
+            `
+
+            console.log(str);
+            
+        }
+
+
+        printUser.call(person,'surat','india');
+
+        printUserApply.apply(person,['surat','india']);
+
+        let bindFunction= printUserBind.bind(person,'surat','india');
+        bindFunction();
+        
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 04efb7796586439b09f90f8ca239e2de -->
+    <fieldset>
+        <legend>Find Wheather</legend>
+        <input type="text" name="" id="city">
+        <button id="btn1" onclick="getWhet(getWheather)"> Submit</button>
+        <div class="resulu" id="result">
+           
+        </div>
+    </fieldset>
+
+
+    <script>
+        let apiK="04efb7796586439b09f90f8ca239e2de"
+       async  function getWhet(cb){
+            
+            let city = document.getElementById('city').value;
+            console.log(city);
+            let url = `http://api.openweathermap.org/geo/1.0/direct?q=${city},GJ,IN&limit=5&appid=${apiK}`;
+            let res = await fetch(url);
+            let data = await res.json();
+            data= data[0]
+              let lat = data.lat;
+             let long= data.lon;
+             console.log(data);
+             
+            cb(lat,long)
+      
+        }
+
+        const  getWheather =async(lat,long)=>{
+             console.log(lat);
+             
+            let url2=`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiK}`
+            const res2 = await fetch(url2);
+            const data2 = await res2.json();
+            let main = data2.main;
+            let str = `
+             <p>
+                <b>humidity:</b>${main.humidity} <br>
+                <b>pressure:</b> ${main.pressure} <br>
+                <b>temp:</b>${main.temp}<br>
+                <b>temp_max:</b>${main.temp_max}<br>
+                <b>temp_min:</b>${main.pressure}<br>
+            </p>
+            
+            `
+            document.getElementById('result').innerHTML=str
+            
+        }
+    </script>
+</body>
+</html>
