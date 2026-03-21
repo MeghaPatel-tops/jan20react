@@ -1,9 +1,12 @@
 import React from 'react'
 
 function About() {
+  const username="Megha";
   return (
     <div>
         <h2>About</h2>
+        <hr />
+        <span>Welcome:{username}</span>
     </div>
   )
 }
