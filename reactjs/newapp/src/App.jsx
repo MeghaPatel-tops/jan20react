@@ -3,9 +3,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Home from './Components/Home'
 import About from './Components/About'
-
+import './Components/style.css'
 import Navbar from './Components/Navbar'
 import Counter from './Components/Counter'
+import Hero from './Components/Hero'
+import Contact from './Components/Contact'
 // import './App.css'
 
 function App() {
@@ -15,10 +17,12 @@ function App() {
   return (
     <>
     <Navbar navitems={navItems}/>
-        <h1>Welcome to react app</h1>
+        <h1 className='head'>Welcome to react app</h1>
+        <Hero />
         <Home />
         <About />
         <Counter />
+        <Contact />
       
     </>
   )
