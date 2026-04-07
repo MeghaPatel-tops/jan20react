@@ -8,6 +8,9 @@ import Home from './Components/Home';
 import Product from './Components/Product';
 import Post from './Components/Post';
 import { QueryClientProvider,QueryClient } from '@tanstack/react-query';
+import Parent from './Components/Parent';
+import { ThemeProvider } from 'react-bootstrap';
+import NewCount from './Components/NewCount';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,9 +24,14 @@ function App() {
          {/* <Todo /> */}
          {/* <Home/> */}
          {/* <Product /> */}
-        <QueryClientProvider client={queryClient}>
+        {/* <QueryClientProvider client={queryClient}>
           <Post />
-        </QueryClientProvider>
+        </QueryClientProvider> */}
+{/*         
+             <Parent/> */}
+             <NewCount/>
+     
+       
       </div>
      
     
