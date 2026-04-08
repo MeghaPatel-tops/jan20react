@@ -11,6 +11,9 @@ import { QueryClientProvider,QueryClient } from '@tanstack/react-query';
 import Parent from './Components/Parent';
 import { ThemeProvider } from 'react-bootstrap';
 import NewCount from './Components/NewCount';
+import EmployeeData from './Components/EmployeeData';
+import PostCreate from './Components/PostCreate';
+import PostView from './Components/PostView';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,7 +32,10 @@ function App() {
         </QueryClientProvider> */}
 {/*         
              <Parent/> */}
-             <NewCount/>
+             {/* <NewCount/> */}
+             {/* <EmployeeData /> */}
+             <PostCreate/>
+             <PostView/>
      
        
       </div>
