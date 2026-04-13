@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import db from '../../Firebase/db';
+
 
 function Create() {
     const [emp,setEmp] =useState({});
@@ -13,21 +15,22 @@ function Create() {
             [name]:value
         })
     }
-
-    const handleClick = async(e)=>{
-        e.preventDefault();
-          try {
-             let res = await axios.post('http://localhost:3000/employee',emp);
-             if(res){
-                alert('Employee Registerd')
-                navigate('/Employee')
-             }
-          } catch (error) {
-              console.log(error);
+    //   const handleClick = async(e)=>{
+    //     e.preventDefault();
+    //       try {
+    //          let res = await axios.post('http://localhost:3000/employee',emp);
+    //          if(res){
+    //             alert('Employee Registerd')
+    //             navigate('/Employee')
+    //          }
+    //       } catch (error) {
+    //           console.log(error);
               
-          }
+    //       }
           
-    }
+    // }
+
+ 
     return (
         <div>
             <div class="min-h-screen flex items-center justify-center">

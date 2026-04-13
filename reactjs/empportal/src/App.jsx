@@ -10,6 +10,8 @@ import Navbar from './Navbar'
 import Create from './Components/Employee/Create'
 import View from './Components/Employee/View'
 import Edit from './Components/Employee/Edit'
+import CreateUser from './Components/Users/CreateUser'
+import Login from './Components/Users/Login'
 
 
 function App() {
@@ -25,6 +27,9 @@ function App() {
                <Route path='/contact' element={<Contact />}></Route>
                <Route path='/Employee/create' element={<Create/>}></Route>
                <Route path='/Employee' element={<View/>}></Route>
+                <Route path='/Employee/edit/:id' element={<Edit/>}></Route>
+                <Route path='/User/create' element={<CreateUser></CreateUser>}></Route>
+               <Route path='/Login' element={<Login/>}></Route>
                 <Route path='/Employee/edit/:id' element={<Edit/>}></Route>
           </Routes>
       </div>
