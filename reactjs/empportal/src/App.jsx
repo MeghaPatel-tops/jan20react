@@ -12,6 +12,7 @@ import View from './Components/Employee/View'
 import Edit from './Components/Employee/Edit'
 import CreateUser from './Components/Users/CreateUser'
 import Login from './Components/Users/Login'
+import Profile from './Components/Users/Profile'
 
 
 function App() {
@@ -29,8 +30,9 @@ function App() {
                <Route path='/Employee' element={<View/>}></Route>
                 <Route path='/Employee/edit/:id' element={<Edit/>}></Route>
                 <Route path='/User/create' element={<CreateUser></CreateUser>}></Route>
-               <Route path='/Login' element={<Login/>}></Route>
+               <Route path='/login' element={<Login/>}></Route>
                 <Route path='/Employee/edit/:id' element={<Edit/>}></Route>
+                <Route path='/profile' element={<Profile/>}></Route>
           </Routes>
       </div>
     </>

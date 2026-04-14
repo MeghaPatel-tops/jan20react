@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
-
+import { addDoc, collection, query,where,getDocs } from 'firebase/firestore';
+import db from '../../Firebase/db';
+import { useNavigate } from 'react-router-dom';
 function Login() {
-    const {user,setUser}= useState({})
+    const [user,setUser] = useState({})
+
+    const navigate = useNavigate()
      const handleChange= (e)=>{
         const {name,value}=e.target;
+      
         setUser({
             ...user,
             [name]:value
@@ -11,10 +16,12 @@ function Login() {
     }
 
     const handleClick = async(e)=>{
+        console.log(user);
+        
         e.preventDefault()
        try {
                 const docRef = collection(db,'user_new');
-                const q = query(docRef,where('email','==',user.email));
+                const q = query(docRef,where('email','==',user.email),where('pwd',"==",user.pwd));
                 const quaerySnap = await getDocs(q);
                 let userArray=[];
                 console.log(quaerySnap);
@@ -25,7 +32,9 @@ function Login() {
                 })
                 console.log(userArray);
                 if(userArray.length>0){
+                    localStorage.setItem('loggedUser',JSON.stringify(userArray[0]))
                     alert('Login successfully');
+                    navigate('/profile')
                 }
                 else{
                     alert('Login Fail')
@@ -51,16 +60,11 @@ function Login() {
                             class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none" name='email' onChange={handleChange} />
                     </div>
                      <div>
-                        <label class="block mb-1 text-gray-600 font-semibold">Contact</label>
-                        <input type="text" placeholder="Enter name"
-                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none" name='contact' onChange={handleChange} />
+                        <label class="block mb-1 text-gray-600 font-semibold">Password</label>
+                        <input type="password" placeholder="Enter name"
+                            class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none" name='pwd' onChange={handleChange} />
                     </div>
-                    <div>
-                        <label class="block mb-1 text-gray-600 font-semibold">Profile Image</label>
-                        <input type="text" accept="image/*"
-                            class="w-full px-4 py-2 border rounded-lg bg-white focus:ring-2 focus:ring-blue-400 outline-none" name='eimage' onChange={handleChange} />
-                    </div>
-
+                    
 
                     <button
                         class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition" onClick={handleClick}>

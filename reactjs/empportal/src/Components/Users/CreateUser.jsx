@@ -2,9 +2,11 @@ import { addDoc, collection, query,where,getDocs } from 'firebase/firestore';
 import React, { useState } from 'react'
 import db from '../../Firebase/db';
 import { validateUser } from '../../Comman';
+import { useNavigate } from 'react-router-dom';
 
 function CreateUser() {
-    const [user,setUser]= useState({email:'',name:'',password:'',conatct:''});
+    const [user,setUser]= useState({email:'',name:'',pwd:'',conatct:''});
+    const navigate = useNavigate()
 
     const handleChange= (e)=>{
         const {name,value}=e.target;
@@ -36,6 +38,7 @@ function CreateUser() {
                 else{
                     const res = await addDoc(docRef,user);
                     alert('User created!')
+                    navigate('/login')
                 }
                }
          
