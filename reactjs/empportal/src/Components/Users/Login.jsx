@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { addDoc, collection, query,where,getDocs } from 'firebase/firestore';
 import db from '../../Firebase/db';
 import { useNavigate } from 'react-router-dom';
+import loginWithGoogle from './GoogleAuth';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+
 function Login() {
     const [user,setUser] = useState({})
 
@@ -14,6 +17,8 @@ function Login() {
             [name]:value
         })
     }
+    
+    const provider =new  GoogleAuthProvider()
 
     const handleClick = async(e)=>{
         console.log(user);
@@ -47,9 +52,39 @@ function Login() {
        }
         
     }
+   const loginWithGoogle = async()=>{
+       
+       alert('here')
+       const auth = getAuth();
+       signInWithPopup(auth,provider)
+       .then((result)=>{
+           const caredtial = GoogleAuthProvider.credentialFromResult(result);
+           const token = caredtial.accessToken;
+           const user = result.user;
+   
+           console.log(user);
+           if(user){
+               let res = {name:user.displayName,email:user.email}
+               console.log(res);
+                localStorage.setItem('loggedUser',JSON.stringify(res))
+               
+                navigate('/profile')
+               
+           }
+           
+       }).catch((error)=>{
+           const errorCode = error.code;
+           const errorMessage = error.message;
+           console.log(errorMessage);
+           
+            const email = error.customData.email;
+             const credential = GoogleAuthProvider.credentialFromError(error);
+       })
+   }
+   
   return (
     <div>
-          <div class="min-h-screen flex items-center justify-center">
+          <div class="min-h-screen flex  flex-col items-center justify-center">
 
                 <form class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-lg space-y-5" method='post'>
                     <h2 class="text-2xl font-bold text-center text-gray-700">Login Form</h2>
@@ -65,13 +100,20 @@ function Login() {
                             class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400 outline-none" name='pwd' onChange={handleChange} />
                     </div>
                     
-
+                  
                     <button
                         class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition" onClick={handleClick}>
                         Register
                     </button>
                 </form>
+                 <div className='w-100 mt-5'>
+                     <button type='button'
+                        class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition" onClick={loginWithGoogle}>
+                        LoginWithGoogle
+                    </button>
+                 </div>
             </div>
+            
     </div>
   )
 }

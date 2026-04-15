@@ -1,9 +1,11 @@
 import { doc, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import db from '../../Firebase/db';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
     const [user,setUser] = useState({});
+    const navigate = useNavigate();
 
     const handleChange = (e)=>{
          const {name,value}=e.target;
@@ -32,6 +34,11 @@ function Profile() {
         loginUser = JSON.parse(loginUser)
         setUser(loginUser)
     },[])
+
+    const logout  = ()=>{
+       localStorage.removeItem('loggedUser');
+       navigate('/login')
+    }
   return (
     <div>
           <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -40,6 +47,9 @@ function Profile() {
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-lg space-y-5"
       >
+       <div className='flex justify-end'>
+            <button type='button' onClick={logout}>Logout</button>
+       </div>
         <h2 className="text-2xl font-bold text-center text-gray-700">
           User Profile
         </h2>
