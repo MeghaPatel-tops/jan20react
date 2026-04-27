@@ -1,11 +1,13 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import Index from './Products/Index'
 import Categorycreate from './Category/Categorycreate'
 import CategoryView from './Category/CategoryView'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryEdit from './Category/CategoryEdit'
+import ProductCreate from './Products/ProductCreate'
+import ProductView from './Products/ProductView';
+import ProductEdit from './Products/ProductEdit';
 
 
 function Adminindex() {
@@ -36,10 +38,12 @@ function Adminindex() {
             <ToastContainer autoClose={2000} />
 
      <Routes>
-         <Route path='product' element={<Index/>}></Route>
+         <Route path='product' element={<ProductView/>}></Route>
          <Route path='category/create' element={<Categorycreate />}></Route>
          <Route path='category' element={<CategoryView />}></Route>
           <Route path='category/edit/:id' element={<CategoryEdit />}></Route>
+           <Route path='product/edit/:id' element={<ProductEdit />}></Route>
+          <Route path='product/create' element={<ProductCreate/>}></Route>
      </Routes>
 
   </main>
