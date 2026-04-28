@@ -74,7 +74,7 @@ function ProductView() {
                         dispatch(deleteProduct(index.id))
                    }} className='bg-red-400 p-2 text-white'>Delete</button></td>
                    <td>
-                        <NavLink to={'/admin/category/edit/'+index.id} className='bg-green-400 p-2 m-2 text-white'>Edit</NavLink>
+                        <NavLink to={'/admin/product/edit/'+index.id} className='bg-green-400 p-2 m-2 text-white'>Edit</NavLink>
                    </td>
                    
                </tr>

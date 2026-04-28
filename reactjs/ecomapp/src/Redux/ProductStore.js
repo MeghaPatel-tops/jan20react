@@ -66,28 +66,28 @@ export const deleteProduct = createAsyncThunk('deleteProduct',async(id)=>{
     }
 })
 
-// export const updateCategory = createAsyncThunk('updateCategory',async(data)=>{
-//     try {
-//       console.log("in thunk", data.catdata);
+export const updateProduct = createAsyncThunk('updateProduct',async(data)=>{
+    try {
+      console.log("in thunk", data.prodata);
 
-//       const res = await axios.post(
-//         `http://127.0.0.1:8000/api/categories/${data.id}`,
-//         data.catdata,
-//         {
-//           headers: {
-//             "Content-Type": "multipart/form-data",
-//           },
-//           params: {
-//             _method: "PUT",  
-//           }
-//         }
-//       );
+      const res = await axios.post(
+        `http://127.0.0.1:8000/api/products/${data.pid}`,
+        data.prodata,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          params: {
+            _method: "PUT",  
+          }
+        }
+      );
 
-//       return res.data;
-//     } catch (error) {
-//       return rejectWithValue(error.response?.data || "Update failed");
-//     }
-// })
+      return res.data;
+    } catch (error) {
+      return error
+    }
+})
 
 
 const ProductSlice = createSlice({
@@ -154,17 +154,17 @@ const ProductSlice = createSlice({
            .addCase(getProductById.rejected,(state,action)=>{
               state.ProductError=action.payload.response.data.message
            })
-        //     .addCase(updateCategory.pending,(state,action)=>{
-        //          state.isloading=true;
-        //    })
-        //    .addCase(updateCategory.fulfilled,(state,action)=>{
-        //         state.isloading=false
-        //        state.msg = action.payload.message;
+            .addCase(updateProduct.pending,(state,action)=>{
+                 state.productLoader=true;
+           })
+           .addCase(updateProduct.fulfilled,(state,action)=>{
+                state.productLoader=false
+               state.productMsg = action.payload.message;
               
-        //    })
-        //    .addCase(updateCategory.rejected,(state,action)=>{
-        //       state.error=action.payload
-        //    })
+           })
+           .addCase(updateProduct.rejected,(state,action)=>{
+              state.ProductError=action.payload.response.data.message
+           })
     }
 })
 

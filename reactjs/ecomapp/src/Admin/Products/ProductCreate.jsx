@@ -39,8 +39,6 @@ function ProductCreate() {
     const handleSubmit = async(e)=>{
           e.preventDefault();
         console.log(product);
-        
-      
          dispatch(createProduct(product))
         setTimeout(() => {
            dispatch(clearMsg());
