@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { NavLink, Route, Routes } from 'react-router-dom'
 import Categorycreate from './Category/Categorycreate'
 import CategoryView from './Category/CategoryView'
 import { ToastContainer } from "react-toastify";
@@ -21,15 +21,16 @@ function Adminindex() {
     <h2 class="text-2xl font-bold p-4 border-b border-gray-700">Ecom Dashboard</h2>
     
     <nav class="flex-1 p-4 space-y-2">
-      <button  onclick={()=>{
-        showTab('category')
-      }} class="tab-btn w-full text-left p-2 rounded hover:bg-gray-700">Category</button>
-      <button onclick={()=>{
-        showTab('products')
-      }} class="tab-btn w-full text-left p-2 rounded hover:bg-gray-700">Products</button>
-      <button onclick={()=>{
-        showTab('users')
-      }} class="tab-btn w-full text-left p-2 rounded hover:bg-gray-700">Users</button>
+        <div>
+          <NavLink to='/admin/category' class="tab-btn w-full text-left p-2 rounded hover:bg-gray-700">Category</NavLink>
+        </div>
+        <div>
+            <NavLink to='/admin/product' class="tab-btn w-full text-left p-2 rounded hover:bg-gray-700">Products</NavLink>
+        </div>
+         <div>
+           <NavLink to='#' class="tab-btn w-full text-left p-2 rounded hover:bg-gray-700">Users</NavLink>
+         </div>
+    
     </nav>
   </aside>
 
