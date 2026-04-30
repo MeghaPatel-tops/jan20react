@@ -2,13 +2,32 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategory } from '../Redux/CategoryStore';
 import { getProducts } from '../Redux/ProductStore';
+import { NavLink } from 'react-router-dom';
 
 function Userindex() {
    const disptach = useDispatch();
    const {categoryData} = useSelector((state)=>state.category);
    const {productData} = useSelector((state)=>state.product);
    const [CategoryId,setCategoryId]=useState(0);
-   console.log(CategoryId);
+     const [visibleCount, setVisibleCount] = useState(8);
+  const loadMore = () => {
+    setVisibleCount(prev => prev + 8);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 100
+      ) {
+        loadMore();
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+   
    
 
    const categoryChange = (catid)=>{
@@ -28,11 +47,13 @@ function Userindex() {
            return newArray;
             
         }
-   },[CategoryId])
+   },[CategoryId,productData]) 
 
    useEffect(()=>{
        disptach(getCategory())
        disptach(getProducts())
+
+       
    },[])
   return (
     <div>
@@ -43,7 +64,8 @@ function Userindex() {
         <div className="space-x-4">
           <a href="#" className="hover:underline">Home</a>
           <a href="#" className="hover:underline">Login</a>
-          <a href="#" className="hover:underline">Register</a>
+          
+          <NavLink  to={'/registration'}  className="hover:underline">Register</NavLink>
         </div>
       </nav>
 
@@ -71,7 +93,7 @@ function Userindex() {
         <main className="flex-1 p-6">
           <h2 className="text-2xl font-semibold mb-4">Products</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filterProdut && filterProdut.map((product) => (
+            {filterProdut && filterProdut.slice(0,visibleCount).map((product) => (
               <div key={product.id} className="bg-white p-4 rounded-2xl shadow hover:shadow-lg transition">
                 <img src={`http://127.0.0.1:8000/storage/${product.pimage}`}  alt={product.name} className="w-full h-40 object-cover rounded" />
                 <h3 className="mt-2 font-semibold">{product.name}</h3>
