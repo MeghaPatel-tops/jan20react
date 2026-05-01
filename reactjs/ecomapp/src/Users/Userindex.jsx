@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCategory } from '../Redux/CategoryStore';
 import { getProducts } from '../Redux/ProductStore';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 function Userindex() {
    const disptach = useDispatch();
@@ -10,11 +10,23 @@ function Userindex() {
    const {productData} = useSelector((state)=>state.product);
    const [CategoryId,setCategoryId]=useState(0);
      const [visibleCount, setVisibleCount] = useState(8);
+  const [userAuth,setUserAuth]= useState(null);
   const loadMore = () => {
     setVisibleCount(prev => prev + 8);
   };
 
+  const navigate = useNavigate();
+  const logoutFun = ()=>{
+       localStorage.removeItem('loggedUser')
+        navigate('/login')
+  }
+
   useEffect(() => {
+    let loggedUser = localStorage.getItem('loggedUser')? JSON.parse( localStorage.getItem('loggedUser')):null;
+
+    console.log(loggedUser);
+    setUserAuth(loggedUser)
+    
     const handleScroll = () => {
       if (
         window.innerHeight + document.documentElement.scrollTop >=
@@ -63,9 +75,12 @@ function Userindex() {
         <h1 className="text-xl font-bold">MyShop</h1>
         <div className="space-x-4">
           <a href="#" className="hover:underline">Home</a>
-          <a href="#" className="hover:underline">Login</a>
-          
-          <NavLink  to={'/registration'}  className="hover:underline">Register</NavLink>
+          {
+            userAuth  ? <button onClick={logoutFun}   className="hover:underline">Logout</button>:
+            <NavLink  to={'/login'}  className="hover:underline">Login</NavLink>
+          }
+         
+        
         </div>
       </nav>
 

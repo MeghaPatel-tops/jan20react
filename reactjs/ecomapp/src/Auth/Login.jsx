@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser,clearMsg } from "../Redux/UserStore";
+import { createUser,clearMsg, loginUser } from "../Redux/UserStore";
 import { toast } from "react-toastify";
 import { NavLink, useNavigate } from "react-router-dom";
 
-function Register() {
+function Login() {
   const dispatch = useDispatch();
   const {userMsg,userLoader,userError}= useSelector((state)=>state.users)
 const navigate = useNavigate();
   
    
   const [form, setForm] = useState({
-    name: "",
     email: "",
     password: "",
-    confirmPassword: ""
   });
 
   const [error, setError] = useState("");
@@ -27,20 +25,15 @@ const navigate = useNavigate();
   };
 
   const handleSubmit = (e) => {
+    alert('here')
     e.preventDefault();
 
-    // validation
-    if (form.password !== form.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
-    setError("");
+    
 
     console.log("Form Data:", form);
 
     // 👉 call API here
-    dispatch(createUser(form))
+    dispatch(loginUser(form))
 
     setTimeout(()=>{
         navigate('/')
@@ -65,7 +58,7 @@ const navigate = useNavigate();
       <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-md">
         
         <h2 className="text-2xl font-bold mb-6 text-center">
-          Create Account
+         Login Form
         </h2>
 
         {userError && (
@@ -78,15 +71,7 @@ const navigate = useNavigate();
 
         <form onSubmit={handleSubmit} className="space-y-4" method="post">
 
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={form.name}
-            onChange={handleChange}
-            className="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
+        
 
           <input
             type="email"
@@ -108,28 +93,19 @@ const navigate = useNavigate();
             required
           />
 
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            className="w-full border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-
+        
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
           >
-            Register
+            Login
           </button>
         </form>
 
         <p className="text-sm mt-4 text-center">
-          Already have an account?{" "}
-          <NavLink to={'/login'} className="text-blue-600 hover:underline">
-            Login
+           For First time 
+          <NavLink to={'/registration'} className="text-blue-600 hover:underline">
+            Register
           </NavLink>
         </p>
       </div>
@@ -137,4 +113,4 @@ const navigate = useNavigate();
   );
 }
 
-export default Register;
+export default Login;

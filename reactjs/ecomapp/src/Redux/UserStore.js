@@ -36,13 +36,21 @@ export const createUser = createAsyncThunk('createUser',async(data)=>{
         },
       }
           );
-          console.log(res);
+        
           
           
         if(res.status ==201){
             console.log('useres',res);
+              console.log(res);
+                let loggedUser = {
+                    token:res.data.token,
+                    user:res.data.user
+                }
+
+          localStorage.setItem('loggedUser',JSON.stringify(loggedUser))
             
             return res.data
+
          }
        
          else {
@@ -55,6 +63,42 @@ export const createUser = createAsyncThunk('createUser',async(data)=>{
     }
 })
 
+
+export const loginUser = createAsyncThunk('loginUser',async(data)=>{
+    try {
+          const res = await axios.post('http://127.0.0.1:8000/api/login',data,
+             {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+          );
+        
+          
+          
+        if(res.status ==201){
+            console.log('useres',res);
+              console.log(res);
+                let loggedUser = {
+                    token:res.data.token,
+                    user:res.data.user
+                }
+
+          localStorage.setItem('loggedUser',JSON.stringify(loggedUser))
+            
+            return res.data
+
+         }
+       
+         else {
+            throw new Error(res.message)
+         }
+          
+    } catch (error) {
+      
+        return error
+    }
+})
 // export const deleteProduct = createAsyncThunk('deleteProduct',async(id)=>{
 //     try {
 //           const res = await axios.delete(`http://127.0.0.1:8000/api/products/${id}`);
@@ -125,6 +169,25 @@ const UserSlice = createSlice({
                 }
            })
            .addCase(createUser.rejected,(state,action)=>{
+               state.userError=action.payload.response.data.message
+           })
+           .addCase(loginUser.pending,(state,action)=>{
+                state.userLoader=true;
+           })
+           .addCase(loginUser.fulfilled,(state,action)=>{
+                state.userLoader=false;
+              
+                
+                if(action.payload.status==422){
+                    state.userError=action.payload.response.data.message
+                    console.log(state.userError);
+                    
+                }
+                else{
+                    state.userMsg=action.payload.message
+                }
+           })
+           .addCase(loginUser.rejected,(state,action)=>{
                state.userError=action.payload.response.data.message
            })
           
