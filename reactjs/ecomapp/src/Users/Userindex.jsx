@@ -4,6 +4,9 @@ import { getCategory } from '../Redux/CategoryStore';
 import { getProducts } from '../Redux/ProductStore';
 import { NavLink, useNavigate } from 'react-router-dom';
 
+import { addtoCartFunction } from '../Redux/UserStore';
+
+
 function Userindex() {
    const disptach = useDispatch();
    const {categoryData} = useSelector((state)=>state.category);
@@ -11,9 +14,31 @@ function Userindex() {
    const [CategoryId,setCategoryId]=useState(0);
      const [visibleCount, setVisibleCount] = useState(8);
   const [userAuth,setUserAuth]= useState(null);
+  const {userMsg,userError}=useSelector((state)=>state.users)
   const loadMore = () => {
     setVisibleCount(prev => prev + 8);
   };
+
+  function AddToCart(pid,price) {
+   
+    let UserInfo = localStorage.getItem('loggedUser');
+    if(UserInfo){
+        console.log(UserInfo);
+        UserInfo= JSON.parse(UserInfo)
+        const cartData = {
+            'user_id':UserInfo.user.id,
+            'product_id':pid,
+            'quantity':1,
+            'price':price
+        }
+    console.log(cartData);
+    disptach(addtoCartFunction({cart:cartData,token:UserInfo.token}))
+        setTimeout(()=>{
+            alert(product)
+        },2000)
+    }
+    
+}
 
   const navigate = useNavigate();
   const logoutFun = ()=>{
@@ -40,6 +65,11 @@ function Userindex() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
    
+
+   useEffect(()=>{
+       console.log(userMsg);
+       
+   },[userMsg,userError]) 
    
 
    const categoryChange = (catid)=>{
@@ -73,12 +103,20 @@ function Userindex() {
       {/* Navbar */}
       <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
         <h1 className="text-xl font-bold">MyShop</h1>
-        <div className="space-x-4">
+        <div className="space-x-4 flex">
           <a href="#" className="hover:underline">Home</a>
           {
-            userAuth  ? <button onClick={logoutFun}   className="hover:underline">Logout</button>:
+            userAuth  ? 
+            <div>
+              <NavLink to={'/cart'} href="#" className="hover:underline"><i class="fa-solid fa-cart-arrow-down"></i></NavLink>
+              <span>&nbsp;&nbsp;&nbsp;</span>
+              <button onClick={logoutFun}   className="hover:underline">Logout</button>
+            </div>
+            
+            :
             <NavLink  to={'/login'}  className="hover:underline">Login</NavLink>
           }
+         
          
         
         </div>
@@ -106,6 +144,12 @@ function Userindex() {
 
         {/* Products */}
         <main className="flex-1 p-6">
+           {
+            userMsg&& <p>{userMsg}</p>
+          }
+          {
+            userError && <p>{userError}</p>
+          }
           <h2 className="text-2xl font-semibold mb-4">Products</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filterProdut && filterProdut.slice(0,visibleCount).map((product) => (
@@ -113,7 +157,9 @@ function Userindex() {
                 <img src={`http://127.0.0.1:8000/storage/${product.pimage}`}  alt={product.name} className="w-full h-40 object-cover rounded" />
                 <h3 className="mt-2 font-semibold">{product.name}</h3>
                 <p className="text-gray-600">₹{product.price}</p>
-                <button className="mt-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700">
+                <button className="mt-2 bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700" onClick={()=>{
+                  AddToCart(product.id,product.price)
+                }}>
                   Add to Cart
                 </button>
               </div>

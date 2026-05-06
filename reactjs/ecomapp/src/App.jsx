@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import Register from './Auth/Register'
 import Userindex from './Users/Userindex'
 import Login from './Auth/Login'
+import Viewcart from './VieWCART.JSX'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,8 @@ function App() {
          <Route path='/' element={<Userindex/>}></Route>
            <Route path='/registration' element={<Register/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
+            <Route path='/cart' element={<Viewcart/>}></Route>
+
            <Route path='/admin/*' element={<Adminindex/>}></Route>
        </Routes>
     </>
