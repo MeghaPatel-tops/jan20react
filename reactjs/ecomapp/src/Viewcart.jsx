@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteCartFunction, updateCartFunction, viewCartFunction } from './Redux/UserStore';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 function Viewcart() {
@@ -29,6 +31,66 @@ function Viewcart() {
     dispatch(deleteCartFunction({token:userAuth.token,cartid:cartid,user_id:userAuth.user.id}))
     setFlag(flag+1)
   }
+
+   const handlePayment = async () => {
+
+    // Create Order
+    const res = await axios.post(
+      "http://127.0.0.1:8000/api/create-order",
+      {
+        amount: 500
+      },
+      {
+         headers:{
+                   
+                    Authorization: `Bearer ${userAuth.token}`,
+      },
+      }
+    );
+
+    console.log(res);
+    
+    const order = res.data.order;
+
+    const options = {
+      key: res.data.key,
+      amount: order.amount,
+      currency: order.currency,
+      name: "My Shop",
+      description: "Test Payment",
+      order_id: order.id,
+
+      handler: async function (response) {
+
+        // Verify Payment
+        const verify = await axios.post(
+          "http://127.0.0.1:8000/api/verify-payment",
+          response,
+           {
+         headers:{
+                   
+                    Authorization: `Bearer ${userAuth.token}`,
+      },
+      }
+        );
+
+        if (verify.data.success) {
+          alert("Payment Success");
+        } else {
+          alert("Payment Failed");
+        }
+      },
+
+      theme: {
+        color: "#3399cc"
+      }
+    };
+
+    const rzp = new window.Razorpay(options);
+
+    rzp.open();
+  };
+
 
 
 
@@ -133,7 +195,7 @@ function Viewcart() {
                   <span>Total:</span> <span>{cartTotal}</span>
                 </p>
 
-                <button class="w-full mt-4 bg-green-500 text-white py-2 rounded hover:bg-green-600">
+                <button class="w-full mt-4 bg-green-500 text-white py-2 rounded hover:bg-green-600" onClick={handlePayment}>
                   Checkout
                 </button>
               </div>

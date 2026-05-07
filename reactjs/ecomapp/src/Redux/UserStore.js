@@ -76,25 +76,7 @@ export const addtoCartFunction = createAsyncThunk('addtoCartFunction', async (da
         );
 
 
-
-        if (res.status == 200) {
-            console.log('useres', res);
-            console.log(res);
-            let loggedUser = {
-                token: res.data.token,
-                user: res.data.user
-            }
-
-            localStorage.setItem('loggedUser', JSON.stringify(loggedUser))
-
-            return res.data
-
-        }
-
-
-        else {
-            throw new Error(res.message)
-        }
+        return res.data;
 
     } catch (error) {
 

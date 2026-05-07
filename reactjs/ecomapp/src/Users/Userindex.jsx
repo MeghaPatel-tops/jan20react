@@ -34,7 +34,7 @@ function Userindex() {
     console.log(cartData);
     disptach(addtoCartFunction({cart:cartData,token:UserInfo.token}))
         setTimeout(()=>{
-            alert(product)
+          
         },2000)
     }
     
