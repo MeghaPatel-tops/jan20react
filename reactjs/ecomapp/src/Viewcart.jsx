@@ -50,18 +50,25 @@ function Viewcart() {
 
     console.log(res);
     
-    const order = res.data.order;
+    const order = res.data;
+    console.log(order);
+    
 
     const options = {
-      key: res.data.key,
+      key: order.key,
       amount: order.amount,
       currency: order.currency,
       name: "My Shop",
       description: "Test Payment",
-      order_id: order.id,
+      order_id: order.order_id,
 
       handler: async function (response) {
-
+        response['shipping_name']="Megha",
+        response['shipping_email']="test@gmail.com"
+        response['shipping_phone']="09090909"
+        response['shipping_address']="101 main street surat"
+          console.log(response);
+    
         // Verify Payment
         const verify = await axios.post(
           "http://127.0.0.1:8000/api/verify-payment",
